@@ -1,10 +1,16 @@
 <template>
-  <div id="mainBox"></div>
+  <div id="mainBox">
+    <TopNavMenu></TopNavMenu>
+  </div>
 </template>
 
 <script>
-export default {
+import TopNavMenu from '@/components/TopNavMenu'
 
+export default {
+  components: {
+    TopNavMenu
+  }
 }
 </script>
 
