@@ -5,7 +5,11 @@
     </div>
     <div class="titleTxt">
       <transition-group name="title">
-        <span class="titleTxt title-item" v-for="title in titleList" v-bind:key="title">
+        <span
+          class="titleTxt title-item"
+          v-for="title in titleList"
+          v-bind:key="title"
+        >
           {{ title }}
         </span>
       </transition-group>
@@ -88,12 +92,13 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 50%;
     cursor: pointer;
     .topElement {
       height: 60%;
     }
     &:hover {
-      border-radius: 50%;
+      transition: all 0.5s;
       background-color: rgb(219, 219, 219);
     }
   }
@@ -103,11 +108,13 @@ export default {
   }
 }
 
+// 通过Vue列表过渡实现标题的动态响应效果
 .title-item {
   transition: all 0.5s;
   display: inline-block;
 }
-.title-enter, .title-leave-to {
+.title-enter,
+.title-leave-to {
   opacity: 0;
   transform: translateX(-50px);
 }

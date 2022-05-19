@@ -73,7 +73,7 @@ export default {
   overflow: hidden;
   background-color: #fff;
   display: flex;
-  animation: bounce 0.8s 0.5s;
+  animation: 'swing' 1s 0.5s;
 }
 
 #left {
