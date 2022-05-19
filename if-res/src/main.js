@@ -7,6 +7,7 @@ import ElementUI from 'element-ui'
 import less from 'less'
 import 'element-ui/lib/theme-chalk/index.css'
 import '@/assets/fonts/font.css'
+import 'animate.css'
 
 Vue.use(ElementUI) // 引入element ui组件库
 Vue.use(less) // 引入less css拓展
