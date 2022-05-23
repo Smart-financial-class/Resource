@@ -11,6 +11,5 @@ export default new Router({
       name: 'MainPage',
       component: MainPage
     }
-  ],
-  base: '/ifinancial'
+  ]
 })
