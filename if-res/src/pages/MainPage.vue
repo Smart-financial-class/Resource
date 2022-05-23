@@ -14,7 +14,7 @@
       </transition>
     </div>
     <div id="page2">
-      <iframe src="../../static/resources/index.html" frameborder="0"></iframe>
+      <!-- <iframe src="../../static/resources/index.html" frameborder="0"></iframe> -->
     </div>
   </div>
 </template>
