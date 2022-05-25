@@ -12,6 +12,16 @@
           <Login></Login>
         </div>
       </transition>
+      <transition name="registerAnimate">
+        <div
+          id="registerBox"
+          v-if="registerVisibility"
+          :style="{ height: style.height }"
+          @click="hideRegister"
+        >
+          <Register></Register>
+        </div>
+      </transition>
     </div>
     <div id="page2">
       <!-- <iframe src="../../static/resources/index.html" frameborder="0"></iframe> -->
@@ -22,6 +32,7 @@
 <script>
 import TopNavMenu from '@/components/TopNavMenu'
 import Login from '@/components/Login'
+import Register from '@/components/Register'
 
 // 封装一个防抖函数,用于防止监听鼠标滚轮事件时的函数抖动
 // 通过测试，使用防抖函数后监听性能有明显改善
@@ -38,6 +49,7 @@ export default {
   data () {
     return {
       loginVisibility: 0,
+      registerVisibility: 0,
       style: {
         height: document.documentElement.clientHeight + 'px'
       }
@@ -56,11 +68,17 @@ export default {
       // 调用子组件同名函数，监听鼠标滚轮事件，判断滚动方向
       debounce(this.$refs.top.handleMouseWheel(event), 300)
       this.$refs.top.handleMouseWheel(event)
+    },
+    hideRegister (e) {
+      if (e.target.getAttribute('id') === 'registerBox') {
+        this.registerVisibility = 0
+      }
     }
   },
   components: {
     TopNavMenu,
-    Login
+    Login,
+    Register
   },
   mounted () {
     window.onresize = () => {
@@ -72,6 +90,15 @@ export default {
 
 <style scoped lang="less">
 #loginBox {
+  position: fixed;
+  z-index: 999;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#registerBox {
   position: fixed;
   z-index: 999;
   width: 100%;

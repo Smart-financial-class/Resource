@@ -37,6 +37,11 @@
             >Sign in</el-button
           >
         </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="goRegister" class="textRow"
+            >Sign up</el-button
+          >
+        </el-form-item>
       </el-form>
       <div class="textRow">
         HDU iF(intelligent Financial) &nbsp;&nbsp;&nbsp;&nbsp;<a
@@ -60,7 +65,21 @@ export default {
     }
   },
   methods: {
-    onSubmit () { }
+    onSubmit () {
+      const ele = document.querySelector('#loginBox')
+      ele.classList.add('animate__animated', 'animate__backOutLeft')
+      this.$parent.loginVisibility = 0
+    },
+    goRegister () {
+      // 首先登录盒子飞出
+      const ele = document.querySelector('#loginBox')
+      ele.classList.add('animate__animated', 'animate__backOutLeft')
+      this.$parent.loginVisibility = 0
+      // 注册盒子飞入(延迟飞入)
+      setTimeout(() => {
+        this.$parent.registerVisibility = 1
+      }, 500)
+    }
   }
 }
 </script>
@@ -71,7 +90,6 @@ export default {
   height: 500px;
   border-radius: 15px;
   overflow: hidden;
-  background-color: #fff;
   display: flex;
   animation: 'swing' 1s 0.5s;
 }
@@ -90,6 +108,7 @@ export default {
   justify-content: space-around;
   align-self: center;
   flex-direction: column;
+  background-color: #fff;
 }
 
 #loginPic {

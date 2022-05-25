@@ -6,4 +6,19 @@ export default {
   express: {
     port: 7001,
   },
+  cors: {
+    credentials: true,
+    origin: '*',
+    allowHeaders: '*',
+    allowMethods: '*'
+  },
+  orm: {
+    type: "mysql",
+    host: "localhost",
+    port: 3306,
+    username: "root",
+    password: "root",
+    database: 'iFinancial'
+  }
 } as MidwayConfig;
+
