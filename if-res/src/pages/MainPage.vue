@@ -9,7 +9,7 @@
           :style="{ height: style.height }"
           @click="hideLogin"
         >
-          <Login></Login>
+          <Login ref="loginBox"></Login>
         </div>
       </transition>
       <transition name="registerAnimate">

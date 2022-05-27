@@ -79,6 +79,12 @@ export default {
       setTimeout(() => {
         this.$parent.registerVisibility = 1
       }, 500)
+    },
+    // 登录盒子从左边飞入
+    loginBoxFlyIn () {
+      this.$parent.loginVisibility = 1
+      const ele = document.querySelector('#loginBox')
+      ele.classList.add('animate__animated', 'animate__backInRight')
     }
   }
 }

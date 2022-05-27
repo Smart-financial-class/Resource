@@ -37,11 +37,12 @@
             </el-form-item>
           </el-col>
           <el-col :span="9" :offset="2">
-            <!-- 手机号 -->
+            <!-- 手机号，只允许输入数字 -->
             <el-form-item prop="phone">
               <el-input
                 v-model="registerForm.phone"
                 placeholder="手机号"
+                type="number"
               ></el-input>
             </el-form-item>
           </el-col>
@@ -108,7 +109,7 @@ export default {
     return {
       registerForm: {
         username: '',
-        password: '',
+        password: null,
         confirmPassword: '',
         email: '',
         phone: ''
@@ -180,8 +181,10 @@ export default {
   },
   methods: {
     async onSubmit () {
-      if (this.checkRegisterForm()) {
-        await this.$axios({
+      const checkResult = await this.checkRegisterForm()
+      console.log(checkResult)
+      if (checkResult) {
+        this.$axios({
           method: 'POST',
           url: 'http://localhost:7001/user/register',
           data: this.registerForm
@@ -192,6 +195,8 @@ export default {
             const ele = document.querySelector('#registerBox')
             ele.classList.add('animate__animated', 'animate__backOutRight')
             this.$parent.registerVisibility = 0
+            // 登录盒子从左飞入
+            this.$parent.loginVisibility = 1
           }
           return response
         }).catch((error) => {
@@ -203,36 +208,39 @@ export default {
         })
       }
     },
-    checkRegisterForm () {
+    async checkRegisterForm () {
       // 进行前端校验
-      this.$refs.registerForm.validate(async (valid) => {
-        if (valid) {
-          // 后端校验
-          await this.$axios({
-            method: 'POST',
-            url: 'http://localhost:7001/user/check',
-            data: this.registerForm
-          }).then((response) => {
-            if (response.data === 'ok') {
-              return true
-            } else {
+      return new Promise(resolve => {
+        this.$refs.registerForm.validate(async (valid) => {
+          if (valid) {
+            // 后端校验
+            await this.$axios({
+              method: 'POST',
+              url: 'http://localhost:7001/user/check',
+              data: this.registerForm
+            }).then((response) => {
+              if (response.data === 'ok') {
+                console.log(response)
+                resolve(true)
+              } else {
+                this.$message({
+                  message: response.data,
+                  type: 'error'
+                })
+                resolve(false)
+              }
+            }).catch((error) => {
+              console.log(error)
               this.$message({
-                message: response.data,
+                message: error.code,
                 type: 'error'
               })
-              return false
-            }
-          }).catch((error) => {
-            console.log(error)
-            this.$message({
-              message: error.message,
-              type: 'error'
+              resolve(false)
             })
-            return false
-          })
-        } else {
-          return false
-        }
+          } else {
+            resolve(false)
+          }
+        })
       })
     },
     resetForm () {
@@ -320,6 +328,11 @@ export default {
   }
   &::placeholder {
     transition: all 0.5s;
+  }
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
   }
 }
 
