@@ -72,7 +72,7 @@ export default {
     hideRegister (e) {
       if (e.target.getAttribute('id') === 'registerBox') {
         const ele = document.querySelector('#registerBox')
-        ele.classList.add('animate__animated', 'animate__backOutUp')
+        ele.classList.add('animate__animated', 'animate__myBackOutUp')
         this.registerVisibility = 0
       }
     }
@@ -142,7 +142,28 @@ iframe {
   height: 100%;
 }
 
-// @keyframes loginAppear {
+@keyframes myBackOutUp {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
 
-// }
+  20% {
+    transform: translateY(0px) scale(0.7);
+    opacity: 0.7;
+  }
+
+  100% {
+    transform: translateY(-100%) scale(0.7);
+    opacity: 0.7;
+  }
+}
+
+.myBackOutUp {
+  animation-name: myBackOutUp;
+}
+
+.animate__myBackOutUp {
+  animation: myBackOutUp 0.8s ease;
+}
 </style>

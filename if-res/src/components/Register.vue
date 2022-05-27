@@ -10,7 +10,7 @@
     </div>
     <div id="right">
       <el-row :gutter="0" class="topBar">
-        <el-col :span="4" :offset="2">
+        <el-col :span="4" :offset="20">
           <img
             src="../assets/iF_logo.png"
             alt="iF_logo"
@@ -18,7 +18,7 @@
             class="undrag"
         /></el-col>
       </el-row>
-      <div class="textRow">Register for iF</div>
+      <div class="textRow" id="registerTitle">Register for iF</div>
       <el-form
         :model="registerForm"
         ref="registerForm"
@@ -28,7 +28,7 @@
         :rules="rules"
       >
         <el-row class="inputRow">
-          <el-col :span="10" :offset="2">
+          <el-col :span="9" :offset="2">
             <el-form-item prop="username">
               <el-input
                 v-model="registerForm.username"
@@ -36,7 +36,7 @@
               ></el-input>
             </el-form-item>
           </el-col>
-          <el-col :span="10" :offset="2">
+          <el-col :span="9" :offset="2">
             <!-- 手机号 -->
             <el-form-item prop="phone">
               <el-input
@@ -48,7 +48,7 @@
         </el-row>
         <!-- 密码，一行 -->
         <el-row class="inputRow">
-          <el-col :span="22" :offset="2">
+          <el-col :span="20" :offset="2">
             <el-form-item prop="password">
               <el-input
                 v-model="registerForm.password"
@@ -60,7 +60,7 @@
         </el-row>
         <!-- 重复密码，一行 -->
         <el-row class="inputRow">
-          <el-col :span="22" :offset="2">
+          <el-col :span="20" :offset="2">
             <el-form-item prop="confirmPassword">
               <el-input
                 v-model="registerForm.confirmPassword"
@@ -72,7 +72,7 @@
         </el-row>
         <!-- 邮箱 -->
         <el-row class="inputRow">
-          <el-col :span="22" :offset="2">
+          <el-col :span="20" :offset="2">
             <el-form-item prop="email">
               <el-input
                 v-model="registerForm.email"
@@ -153,6 +153,11 @@ export default {
           {
             required: true,
             message: '请输入邮箱！',
+            trigger: 'blur'
+          },
+          {
+            type: 'email',
+            message: '请输入正确的邮箱！',
             trigger: 'blur'
           }
         ],
@@ -252,6 +257,8 @@ export default {
   overflow: hidden;
   display: flex;
   animation: 'bounceInRight' 0.5s;
+  // 设置阴影
+  box-shadow: 0 0 30px rgba(250, 139, 96, 0.2);
 }
 
 /deep/ .el-form-item__content {
@@ -283,6 +290,10 @@ export default {
 
 #iF_logo {
   width: 30px;
+}
+
+#registerTitle {
+  font-size: 22px;
 }
 
 /deep/ .el-input__inner {
