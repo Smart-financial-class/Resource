@@ -54,6 +54,7 @@
                 v-model="registerForm.password"
                 placeholder="密码"
                 type="password"
+                show-password
               ></el-input>
             </el-form-item>
           </el-col>
@@ -66,6 +67,7 @@
                 v-model="registerForm.confirmPassword"
                 placeholder="重复密码"
                 type="password"
+                show-password
               ></el-input>
             </el-form-item>
           </el-col>
@@ -81,24 +83,19 @@
             </el-form-item>
           </el-col>
         </el-row>
-        <el-row :gutter="20" class="inputRow">
-          <el-col :span="5" :offset="7">
-            <el-button type="primary" @click="onSubmit" class="textRow">
-              Sign up
-            </el-button>
-          </el-col>
-          <el-col :span="5" :offset="3">
-            <el-button type="primary" @click="resetForm" class="textRow">
-              Reset
-            </el-button>
-          </el-col>
-        </el-row>
+        <div class="buttonRow">
+          <el-button type="primary" @click="onSubmit" class="textRow">
+            Sign up
+          </el-button>
+          <!-- Reset Button -->
+          <el-button type="primary" @click="resetForm" class="textRow">
+            Reset
+          </el-button>
+        </div>
       </el-form>
-      <div class="textRow">
-        HDU iF(intelligent Financial) &nbsp;&nbsp;&nbsp;&nbsp;<a
-          href="http://zhuoyue.hdu.edu.cn/"
-          >more?</a
-        >
+      <div class="textRow" id="linkText">
+        HDU iF(intelligent Financial) &nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="http://zhuoyue.hdu.edu.cn/">more?</a>
       </div>
     </div>
   </div>
@@ -259,10 +256,15 @@ export default {
   animation: 'bounceInRight' 0.5s;
   // 设置阴影
   box-shadow: 0 0 30px rgba(250, 139, 96, 0.2);
+  .el-button--primary {
+    background-color: #fff;
+    border-color: #f09f5c;
+    color: #f09f5c;
+  }
 }
 
 /deep/ .el-form-item__content {
-  margin-left: 0!important;
+  margin-left: 0 !important;
 }
 
 #left {
@@ -296,13 +298,34 @@ export default {
   font-size: 22px;
 }
 
+#linkText {
+  margin-bottom: 22px;
+}
+
 /deep/ .el-input__inner {
   border-width: 0 0 2px 0;
   border-radius: 0;
+  &:active {
+    border-color: #f09f5c;
+  }
+  &:focus {
+    border-color: #f09f5c;
+    &::placeholder {
+      font-size: 16px;
+      font-weight: bold;
+      transform: translateX(calc(50% - 25px));
+      transition: all 0.5s;
+      color: #dddfd4;
+    }
+  }
+  &::placeholder {
+    transition: all 0.5s;
+  }
 }
 
 .topBar {
   margin-top: 20px;
+  height: 20px;
 }
 
 .undrag {
@@ -313,5 +336,10 @@ export default {
   display: flex;
   justify-content: center;
   font-family: 'iF-Font';
+}
+
+.buttonRow {
+  display: flex;
+  justify-content: center;
 }
 </style>

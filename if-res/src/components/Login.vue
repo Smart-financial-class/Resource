@@ -84,14 +84,15 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="less" scoped>
 #loginBox {
   width: 900px;
   height: 500px;
   border-radius: 15px;
   overflow: hidden;
   display: flex;
-  animation: 'swing' 1s 0.5s;
+  animation: 'bounce' 1s 0.5s;
+  box-shadow: 0 0 30px rgba(250, 139, 96, 0.2);
 }
 
 #left {
@@ -133,5 +134,14 @@ export default {
   display: flex;
   justify-content: center;
   font-family: 'iF-Font';
+}
+
+// /deep/ .el-form-item__content {
+//   margin-left: 0!important;
+// }
+
+/deep/ .el-input__inner {
+  border-width: 0 0 2px 0;
+  border-radius: 0;
 }
 </style>
