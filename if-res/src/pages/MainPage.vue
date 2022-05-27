@@ -71,6 +71,8 @@ export default {
     },
     hideRegister (e) {
       if (e.target.getAttribute('id') === 'registerBox') {
+        const ele = document.querySelector('#registerBox')
+        ele.classList.add('animate__animated', 'animate__backOutUp')
         this.registerVisibility = 0
       }
     }

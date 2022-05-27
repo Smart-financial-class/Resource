@@ -11,17 +11,6 @@ export class HomeController {
   @InjectEntityModel(User)
   userModel: Repository<User>;
 
-  async saveUser() {
-    // 保存用户信息
-    let user = new User();
-    user.username = 'demo';
-    user.password = 'pwd';
-    user.email = 'demo@example.com';
-    user.phone = '12345';
-    const userResult = await this.userModel.save(user);
-    console.log('success', userResult.uid);
-  }
-
   @Inject()
   ctx: Context;
 
@@ -38,6 +27,20 @@ export class HomeController {
 
   @Post('/register')
   async register(): Promise<string> {
-    return 'Successfully register!';
+    console.log(this.req.body)
+    const status = await this.saveUser(this.req.body)
+      .then(() => {
+        return 'ok';
+      })
+      .catch(err => {
+        console.log(err)
+        return err.message;
+      })
+    return status;
+  }
+
+  async saveUser(user: User) {
+    const userResult = await this.userModel.save(user);
+    console.log('success', userResult.uid);
   }
 }
